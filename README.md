@@ -1,103 +1,147 @@
-import { useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { motion } from "framer-motion";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lewov - Premium Streetwear</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f1ee;
+      color: #333;
+    }
+    header {
+      background: #1a1a1a;
+      padding: 20px 40px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: slideDown 1s ease;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
+    }
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .hero {
+      height: 70vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+    .hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+      animation: fadeIn 2s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .description {
+      padding: 40px;
+      background: white;
+      text-align: center;
+    }
+    .description h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .description p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+    }
+    .slider {
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+      white-space: nowrap;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .slider-text {
+      display: inline-block;
+      padding: 15px 0;
+      font-weight: 600;
+      font-size: 1rem;
+      animation: marquee 20s linear infinite;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">LEWOV</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-const products = [
-  {
-    name: "Drop Shoulder Hoodie",
-    description: "Premium cotton drop shoulder hoodie with Lewov branding.",
-    price: "$45",
-    img: "https://images.unsplash.com/photo-1602810316533-6f5bb18d96b3?auto=format&fit=crop&w=500&q=80"
-  },
-  {
-    name: "Streetwear Tee",
-    description: "Oversized T-shirt with subtle Lewov sleeve print.",
-    price: "$30",
-    img: "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?auto=format&fit=crop&w=500&q=80"
-  },
-  {
-    name: "Cargo Pants",
-    description: "Stylish and comfortable utility pants for all day wear.",
-    price: "$50",
-    img: "https://images.unsplash.com/photo-1580983561447-7b6f4b3e5d17?auto=format&fit=crop&w=500&q=80"
-  }
-];
-
-export default function LewovStore() {
-  useEffect(() => {
-    document.body.style.backgroundColor = "#f5e1c0";
-  }, []);
-
-  return (
-    <div className="min-h-screen px-4 py-8">
-      <motion.h1
-        className="text-4xl font-bold text-center mb-10"
-        initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        Lewov Clothing Store
-      </motion.h1>
-
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: { opacity: 0 },
-          visible: {
-            opacity: 1,
-            transition: {
-              delayChildren: 0.3,
-              staggerChildren: 0.2
-            }
-          }
-        }}
-      >
-        {products.map((product, index) => (
-          <motion.div
-            key={index}
-            className="hover:scale-105 transition-transform"
-            whileHover={{ scale: 1.05 }}
-          >
-            <Card className="rounded-2xl shadow-xl">
-              <img
-                src={product.img}
-                alt={product.name}
-                className="rounded-t-2xl w-full h-60 object-cover"
-              />
-              <CardContent className="p-4">
-                <h2 className="text-xl font-semibold mb-1">{product.name}</h2>
-                <p className="text-sm text-gray-700 mb-2">{product.description}</p>
-                <p className="font-bold text-lg">{product.price}</p>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      <motion.div
-        className="bg-white rounded-2xl p-6 shadow-lg max-w-2xl mx-auto"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <h3 className="text-2xl font-bold mb-4 text-center">Contact Us</h3>
-        <form className="space-y-4">
-          <Input placeholder="Your Name" required />
-          <Input type="email" placeholder="Your Email" required />
-          <Textarea placeholder="Message" rows={4} required />
-          <div className="text-center">
-            <Button className="bg-black text-white rounded-xl px-6 py-2 hover:bg-gray-800">
-              Send Message
-            </Button>
-          </div>
-        </form>
-      </motion.div>
+  <div class="slider">
+    <div class="slider-text">
+      New Drop Available Now — Black Signature Hoodie | White Oversized Tee | Classic Full Sleeve — Shop Fast Before Sold Out!
     </div>
-  );
-}
+  </div>
+
+  <section class="hero">
+    <video autoplay muted loop>
+      <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+    <h2>Own the Look. Rule the Street.</h2>
+  </section>
+
+  <section class="description">
+    <h3>About Lewov</h3>
+    <p>Lewov is a premium streetwear brand designed for modern trendsetters. We combine edgy designs, high-quality materials, and unmatched comfort to create pieces that empower your presence. Whether you're hitting the streets or chilling with friends, Lewov makes sure you do it in style.</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Lewov. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
